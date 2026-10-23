@@ -52,7 +52,7 @@ export const Route = createFileRoute("/")({
 function Kicker({ children }: { children: ReactNode }) {
   return (
     <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
-      <span aria-hidden className="h-px w-10 bg-primary" />
+      <span aria-hidden className="h-px w-10 bg-accent" />
       {children}
     </p>
   );
@@ -76,7 +76,7 @@ function Section({
       <div className="grid gap-8 md:grid-cols-[220px_1fr]">
         <div className="fade-up">
           <Kicker>{kicker}</Kicker>
-          <p aria-hidden className="mt-4 font-serif text-7xl italic leading-none text-primary/25 md:text-8xl">
+          <p aria-hidden className="mt-4 font-serif text-7xl italic leading-none text-primary/35 md:text-8xl">
             {index}
           </p>
         </div>
@@ -102,7 +102,7 @@ function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main">
         <a href="#top" className="font-serif text-2xl italic tracking-tight">
-          vithiya<span className="text-primary">.</span>
+          vithiya<span className="text-accent">.</span>
         </a>
         <ul className="hidden items-center gap-6 lg:flex">
           {navLinks.map((l) => (
@@ -116,7 +116,7 @@ function Nav() {
             </li>
           ))}
         </ul>
-        <a href={`mailto:${profile.email}`} className="hidden rounded-full border border-foreground/25 px-4 py-1.5 text-sm transition hover:border-primary hover:bg-primary hover:text-primary-foreground lg:inline-block">
+        <a href={`mailto:${profile.email}`} className="hidden rounded-full border border-foreground/25 px-4 py-1.5 text-sm transition hover:border-accent hover:bg-accent hover:text-accent-foreground lg:inline-block">
           Say hello
         </a>
         <button
@@ -161,7 +161,7 @@ function Hero() {
 
         <h1 className="fade-up mt-8 font-serif text-[17vw] leading-[0.9] tracking-tight [animation-delay:100ms] sm:text-8xl md:text-[9.5rem]">
           Vithiya
-          <span className="text-primary">*</span>
+          <span className="text-accent">*</span>
           <br />
           <span className="italic font-normal text-muted-foreground">builds software</span>
         </h1>
@@ -226,7 +226,7 @@ function Hero() {
           {[...skills.flatMap((s) => s.items), ...skills.flatMap((s) => s.items)].map((s, i) => (
             <span key={i} className="flex items-center gap-10">
               {s}
-              <span aria-hidden className="text-primary">✳</span>
+              <span aria-hidden className="text-accent">✳</span>
             </span>
           ))}
         </div>
@@ -338,7 +338,7 @@ function Experience() {
           <li key={e.org} className="relative pl-10">
             <span
               aria-hidden
-              className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-2 border-primary bg-background transition group-hover:bg-primary"
+              className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-2 border-primary/45 bg-accent transition group-hover:border-primary"
             />
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{e.dates}</p>
             <h3 className="mt-2 font-serif text-3xl italic">{e.role}</h3>
@@ -376,7 +376,7 @@ function Projects() {
             </p>
             <div>
               {p.badge && (
-                <p className="mb-3 w-fit rounded-full bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
+                <p className="mb-3 w-fit rounded-full bg-accent/30 px-3 py-1 font-mono text-xs text-primary">
                   ✦ {p.badge}
                 </p>
               )}
@@ -487,7 +487,7 @@ function Contact() {
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href={`mailto:${profile.email}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-primary-foreground px-6 py-3.5 text-sm font-semibold text-primary transition hover:-translate-y-0.5 hover:shadow-lift"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground transition hover:-translate-y-0.5 hover:shadow-lift"
             >
               <Mail size={16} /> {profile.email}
               <ArrowUpRight size={15} className="transition group-hover:rotate-45" />
