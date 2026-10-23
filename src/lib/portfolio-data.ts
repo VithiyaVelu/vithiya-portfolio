@@ -80,6 +80,24 @@ export const projects: {
       "A native Android app for farmers: live crop updates, finance tracking and disease alerts, built with careful OOP, multithreading and custom REST API integration.",
     tech: ["Java", "Android Studio", "RESTful APIs"],
   },
+  {
+    title: "Online Electricity Management System",
+    description:
+      "A web app for electricity bill payments, feedback and complaint tracking — with separate user and admin sides, MySQL for storage, and JSP, Servlets and AJAX keeping everything dynamic.",
+    tech: ["JSP", "Servlets", "MySQL", "JavaScript", "AJAX"],
+  },
+  {
+    title: "Library Management System",
+    description:
+      "A database-backed system for managing books, members and issue/return records — full CRUD, proper relationships, and DBMS done right: primary keys, foreign keys and normalization.",
+    tech: ["SQL", "DBMS", "MySQL"],
+  },
+  {
+    title: "Quiz App",
+    description:
+      "A Windows-based quiz app in C# and .NET — OOP and event-driven programming, instant results for players, and an admin side to manage questions and scores via SQL Server.",
+    tech: ["C#", ".NET Framework", "SQL Server"],
+  },
 ];
 
 export const education = [
