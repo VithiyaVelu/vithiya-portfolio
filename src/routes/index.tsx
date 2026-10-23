@@ -153,7 +153,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div aria-hidden className="absolute -right-28 -top-20 hidden h-[560px] w-[560px] rounded-full border border-accent/40 md:block" />
-      <div aria-hidden className="absolute -right-12 top-40 hidden h-[300px] w-[300px] rounded-full border border-dashed border-primary/25 md:block" />
+      <div aria-hidden className="spin-slow absolute -right-12 top-40 hidden h-[300px] w-[300px] rounded-full border border-dashed border-primary/25 md:block" />
 
       <div aria-hidden className="absolute inset-0 bg-ruled opacity-60" />
       <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-36 md:pb-24 md:pt-48">
@@ -528,7 +528,7 @@ function Backdrop() {
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-wash" />
       <div className="absolute inset-0 bg-dots" />
-      <div className="absolute inset-0 bg-dots-warm" />
+      <div className="absolute inset-0 hidden bg-dots-warm sm:block" />
       <div className="absolute inset-x-0 top-0 mx-auto hidden h-full max-w-6xl grid-cols-4 px-5 md:grid">
         {[0, 1, 2, 3].map((i) => (
           <span key={i} className="border-l border-foreground/[0.06] last:border-r" />
