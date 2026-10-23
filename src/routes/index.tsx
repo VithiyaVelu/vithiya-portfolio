@@ -76,7 +76,7 @@ function Section({
       <div className="grid gap-8 md:grid-cols-[220px_1fr]">
         <div className="fade-up">
           <Kicker>{kicker}</Kicker>
-          <p aria-hidden className="mt-4 font-serif text-7xl italic leading-none text-primary/25 md:text-8xl">
+          <p aria-hidden className="mt-4 font-serif text-7xl italic leading-none text-primary/35 md:text-8xl">
             {index}
           </p>
         </div>

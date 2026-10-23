@@ -72,7 +72,7 @@
   --secondary: oklch(0.87 0.012 242);
   --secondary-foreground: oklch(0.3 0.09 333);
   --muted: oklch(0.875 0.011 242);
-  --muted-foreground: oklch(0.45 0.055 333);
+  --muted-foreground: oklch(0.405 0.05 333);
   --accent: oklch(0.7778 0.1605 81.33);
   --accent-foreground: oklch(0.2571 0.085 333.72);
   --destructive: oklch(0.55 0.2 25);
@@ -141,7 +141,7 @@ body { font-family: var(--font-sans); }
   background-size: 100% 3.25rem;
 }
 
-/* Violet wash used behind the hero */
+/* Ice-silver wash with a marigold glow, used behind the hero */
 @utility bg-wash {
   background-image:
     radial-gradient(55% 45% at 78% 8%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%),
