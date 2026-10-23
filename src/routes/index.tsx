@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { handleResumeClick, prefetchResume } from "@/lib/download-resume";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -177,7 +178,7 @@ function Hero() {
               <a href="#projects" className={btnSolid}>
                 See the work <ArrowDown size={16} className="transition group-hover:translate-y-0.5" />
               </a>
-              <a href={profile.resume} download className={btnLine}>
+              <a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={(e) => handleResumeClick(e, profile.resume)} className={btnLine}>
                 <Download size={16} /> Résumé
               </a>
             </div>
@@ -505,7 +506,7 @@ function Contact() {
             <a href={profile.github} target="_blank" rel="noopener noreferrer" className="ink-underline inline-flex items-center gap-1.5 pb-0.5 opacity-85 hover:opacity-100 hover:ink-underline-hover">
               <Github size={15} /> GitHub
             </a>
-            <a href={profile.resume} download className="ink-underline inline-flex items-center gap-1.5 pb-0.5 opacity-85 hover:opacity-100 hover:ink-underline-hover">
+            <a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={(e) => handleResumeClick(e, profile.resume)} className="ink-underline inline-flex items-center gap-1.5 pb-0.5 opacity-85 hover:opacity-100 hover:ink-underline-hover">
               <Download size={15} /> Résumé (PDF)
             </a>
             <span className="inline-flex items-center gap-1.5 opacity-70">
