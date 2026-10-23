@@ -141,16 +141,6 @@ body { font-family: var(--font-sans); }
   background-size: 100% 3.25rem;
 }
 
-/* Ambient light on ice-silver paper: marigold warmth, aubergine depth */
-@utility bg-wash {
-  background-image:
-    radial-gradient(58% 46% at 84% 2%, color-mix(in oklab, var(--marigold) 26%, transparent), transparent 66%),
-    radial-gradient(46% 40% at 2% 18%, color-mix(in oklab, var(--primary) 16%, transparent), transparent 70%),
-    radial-gradient(64% 52% at 92% 62%, color-mix(in oklab, var(--primary) 11%, transparent), transparent 72%),
-    radial-gradient(70% 44% at 18% 104%, color-mix(in oklab, var(--marigold) 16%, transparent), transparent 70%),
-    linear-gradient(180deg, color-mix(in oklab, var(--card) 70%, transparent), transparent 22%, transparent 72%, color-mix(in oklab, var(--secondary) 60%, transparent));
-}
-
 /* Riso-style paper grain pressed into the page */
 @utility bg-grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -159,19 +149,23 @@ body { font-family: var(--font-sans); }
   mix-blend-mode: multiply;
 }
 
-/* Halftone dot fields, faded away from their corners */
-@utility bg-dots {
-  background-image: radial-gradient(color-mix(in oklab, var(--foreground) 34%, transparent) 1px, transparent 1.5px);
-  background-size: 15px 15px;
-  mask-image: radial-gradient(70% 55% at 100% 0%, #000, transparent 70%);
+/* Editorial photography and deliberate, fixed-size typography. */
+.hero-title { font-size: 112px; }
+.hero-subtitle { font-size: 76px; }
+.hero-art { object-position: center 45%; }
+body { letter-spacing: 0; }
+.project-entry { transition: border-color 250ms ease; }
+.project-entry:hover { border-color: var(--primary); }
+@media (max-width: 1023px) {
+  .hero-title { font-size: 96px; }
+  .hero-subtitle { font-size: 62px; }
+  .hero-art { object-position: 58% center; }
 }
-@utility bg-dots-warm {
-  background-image: radial-gradient(color-mix(in oklab, var(--marigold) 55%, transparent) 1.2px, transparent 1.7px);
-  background-size: 13px 13px;
-  mask-image: radial-gradient(55% 46% at 0% 100%, #000, transparent 62%);
-
+@media (max-width: 639px) {
+  .hero-title { font-size: 78px; }
+  .hero-subtitle { font-size: 44px; }
+  .hero-art { opacity: 0.28; object-position: 72% top; mask-image: linear-gradient(to bottom, var(--foreground), transparent 65%); }
 }
-
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes marquee { to { transform: translateX(-50%); } }
