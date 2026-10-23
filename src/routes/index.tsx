@@ -522,6 +522,9 @@ function Contact() {
 /* ————— page ————— */
 
 function Index() {
+  useEffect(() => {
+    prefetchResume(profile.resume);
+  }, []);
   return (
     <div id="top" className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
       <Nav />
