@@ -81,19 +81,15 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-      <div className="grid gap-8 md:grid-cols-[160px_1fr]">
-        <div className="fade-up">
-          <Kicker>{kicker}</Kicker>
-          <p aria-hidden className="mt-4 font-serif text-7xl italic leading-none text-primary/35 md:text-8xl">
-            {index}
-          </p>
-        </div>
+    <section id={id} className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+      <div className="mb-8 flex items-end justify-between gap-5 border-b border-primary/20 pb-5">
         <div>
-          <h2 className="fade-up font-serif text-4xl leading-[1.05] tracking-normal md:text-6xl">{title}</h2>
-          <div className="mt-12">{children}</div>
+          <Kicker>{kicker}</Kicker>
+          <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">{title}</h2>
         </div>
+        <span aria-hidden className="font-mono text-xs text-muted-foreground">/{index}</span>
       </div>
+      {children}
     </section>
   );
 }
@@ -114,20 +110,18 @@ function Nav() {
           vithiya<span className="text-accent">.</span>
         </a>
         <ul className="hidden items-center gap-6 lg:flex">
-          {navLinks.map((l) => (
+          {navLinks.filter(l => ["projects", "experience", "skills", "about"].includes(l.id)).map((l) => (
             <li key={l.id}>
               <a
                 href={`#${l.id}`}
                 className="ink-underline pb-1 text-sm text-muted-foreground transition hover:text-foreground hover:ink-underline-hover"
               >
-                {l.label}
+                {l.id === "projects" ? "Projects" : l.id === "skills" ? "Skills" : l.label}
               </a>
             </li>
           ))}
         </ul>
-        <a href={`mailto:${profile.email}`} className="hidden rounded-full border border-foreground/25 px-4 py-1.5 text-sm transition hover:border-accent hover:bg-accent hover:text-accent-foreground lg:inline-block">
-          Say hello
-        </a>
+        <Button asChild variant="default" className="hidden lg:inline-flex"><a href={`mailto:${profile.email}`}><Mail />Contact me</a></Button>
         <Button
           variant="ghost" size="icon" className="rounded-full lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -160,84 +154,24 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden border-b border-primary/20">
       <img src={editorialSculpture} alt="" aria-hidden width={1536} height={1024} fetchPriority="high" className="hero-art pointer-events-none absolute inset-0 h-full w-full object-cover" />
-      <div className="relative mx-auto max-w-6xl px-5 pb-12 pt-28 md:pb-14 md:pt-32">
-        <p className="fade-up font-mono text-xs uppercase text-muted-foreground">
-          Portfolio — {profile.location}
-        </p>
-
-        <div className="mt-6 flex items-start gap-4">
-          <h1 className="fade-up hero-title font-serif leading-[0.92] [animation-delay:100ms]">
-            Vithiya<span className="text-accent">*</span>
-            <span className="hero-subtitle mt-3 block italic">builds software.</span>
-          </h1>
+      <div className="relative mx-auto max-w-6xl px-5 pb-8 pt-28 md:pt-32">
+        <div className="flex items-center gap-2 text-xs font-medium"><span aria-hidden className="h-2 w-2 rounded-full bg-accent" />Open to software developer & AI/ML roles</div>
+        <h1 className="hero-title mt-6 font-serif leading-none">Vithiya V<span className="text-accent">.</span></h1>
+        <p className="mt-4 max-w-xl font-sans text-2xl font-semibold leading-tight md:text-3xl">Software developer.<br /><span className="font-serif text-3xl font-normal italic md:text-4xl">Curious mind. Practical solutions.</span></p>
+        <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">I build machine-learning pipelines, data-driven web applications and mobile experiences. B.Tech CSE, Puducherry Technological University · Class of 2026.</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button asChild size="lg" className="h-12 px-5"><a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={e => handleResumeClick(e, profile.resume)}><Download />Download résumé</a></Button>
+          <Button asChild variant="outline" size="lg" className="h-12 px-5"><a href="#projects">Explore projects<ArrowDown /></a></Button>
         </div>
-
-        <div className="mt-8 grid gap-8 md:grid-cols-[1fr_270px] md:items-end">
-          <div className="fade-up [animation-delay:200ms]">
-            <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-              <span className="text-foreground">*</span>That's me — a Computer Science graduate from
-              Puducherry Technological University who likes her data clean, her code cleaner, and her
-              machine-learning models actually shipped. Flutter apps, ML pipelines, dashboards that
-              people really use.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#projects" className={btnSolid}>
-                See the work <ArrowDown size={16} className="transition group-hover:translate-y-0.5" />
-              </a>
-              <a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={(e) => handleResumeClick(e, profile.resume)} className={btnLine}>
-                <Download size={16} /> Résumé
-              </a>
-            </div>
-          </div>
-
-          <aside className="fade-up border-l-2 border-accent bg-background/90 pl-5 py-3 md:mt-20 [animation-delay:300ms]">
-            <dl className="space-y-4 text-sm">
-              <div>
-                <dt className="font-mono text-xs uppercase text-muted-foreground">Currently</dt>
-                <dd className="mt-1 font-medium">Open to software & AI/ML roles, 2026</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-xs uppercase text-muted-foreground">Degree</dt>
-                <dd className="mt-1 font-medium">B.Tech CSE · CGPA 8.3/10</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-xs uppercase text-muted-foreground">Find me</dt>
-                <dd className="mt-2 flex gap-2">
-                  {[
-                    { href: profile.github, label: "GitHub", Icon: Github },
-                    { href: profile.linkedin, label: "LinkedIn", Icon: Linkedin },
-                    { href: `mailto:${profile.email}`, label: "Email", Icon: Mail },
-                  ].map(({ href, label, Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target={href.startsWith("http") ? "_blank" : undefined}
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="grid h-9 w-9 place-items-center rounded-full border border-foreground/25 text-muted-foreground transition hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-                    >
-                      <Icon size={16} />
-                    </a>
-                  ))}
-                </dd>
-              </div>
-            </dl>
-          </aside>
+        <div className="mt-5 flex gap-5 text-sm">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 ink-underline hover:ink-underline-hover"><Github size={15} />GitHub<ArrowUpRight size={13} /></a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 ink-underline hover:ink-underline-hover"><Linkedin size={15} />LinkedIn<ArrowUpRight size={13} /></a>
         </div>
-      </div>
-
-      {/* ticker */}
-      <div className="relative border-y border-border bg-card/60 py-3.5">
-        <div className="marquee flex w-max gap-10 whitespace-nowrap font-mono text-xs uppercase text-muted-foreground">
-          {[...skills.flatMap((s) => s.items), ...skills.flatMap((s) => s.items)].map((s, i) => (
-            <span key={i} className="flex items-center gap-10">
-              {s}
-              <span aria-hidden className="text-accent">✳</span>
-            </span>
-          ))}
-        </div>
+        <dl className="mt-9 grid grid-cols-2 gap-y-5 border-t border-primary/20 pt-5 md:grid-cols-4">
+          {[["03", "Industry internships"], ["07", "Projects built"], ["500k+", "Posts analyzed"], ["8.3/10", "B.Tech CGPA"]].map(([value,label]) => <div key={label} className="border-l-2 border-accent pl-4"><dt className="text-xs text-muted-foreground">{label}</dt><dd className="mt-1 font-serif text-3xl">{value}</dd></div>)}
+        </dl>
       </div>
     </section>
   );
@@ -249,16 +183,16 @@ function About() {
   return (
     <Section
       id="about"
-      index="01"
+      index="04"
       kicker="About"
       title={
         <>
-          Curious by default, <span className="italic text-primary">stubborn</span> about details.
+          A little about <span className="italic text-primary">me.</span>
         </>
       }
     >
       <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr]">
-        <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
+        <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
             I'm Vithiya — a B.Tech Computer Science graduate (2022–2026) from Marakkanam, Tamil Nadu.
             I got into software because I like puzzles, and stayed because shipping something that
@@ -296,11 +230,11 @@ function Skills() {
   return (
     <Section
       id="skills"
-      index="02"
-      kicker="Toolbox"
+      index="03"
+      kicker="Skills"
       title={
         <>
-          Things I reach for <span className="italic text-primary">daily</span>.
+          My technical <span className="italic text-primary">toolkit.</span>
         </>
       }
     >
@@ -333,15 +267,15 @@ function Experience() {
   return (
     <Section
       id="experience"
-      index="03"
+      index="02"
       kicker="Experience"
       title={
         <>
-          Where I've <span className="italic text-primary">worked</span> so far.
+          Hands-on <span className="italic text-primary">experience.</span>
         </>
       }
     >
-      <ol className="relative space-y-12 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-border">
+      <ol className="relative space-y-8 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-border">
         {experience.map((e) => (
           <li key={e.org} className="relative pl-10">
             <span
@@ -362,38 +296,44 @@ function Experience() {
 }
 
 const projectIcons = [Activity, ScanLine, ChartNoAxesCombined, Sprout, Zap, BookOpen, ListChecks];
+const projectLabels = ["Intelligent systems", "Machine learning", "Data engineering", "Android development", "Web development", "Database systems", ".NET development"];
+const projectPipelines = [["Health data", "5 AI paradigms", "Recommendations"], ["Steel data", "Ensemble ML", "Risk analysis"], ["500k+ posts", "Sentiment engine", "Dashboard"]];
+
+function ProjectVisual({ index }: { index: number }) {
+  const Icon = projectIcons[index] ?? Activity;
+  return <div aria-hidden className={`project-visual relative flex aspect-[16/8] flex-col justify-between overflow-hidden p-5 ${index === 1 ? "bg-primary text-primary-foreground" : "bg-secondary text-primary"}`}>
+    <div className="flex items-start justify-between"><span className="font-mono text-[10px] uppercase">{projectLabels[index]}</span><Icon size={30} strokeWidth={1.2} /></div>
+    <div className="flex items-center justify-center gap-2 py-4">
+      {(projectPipelines[index] ?? []).map((label,i) => <div key={label} className="flex min-w-0 items-center gap-2"><span className="flex min-h-14 min-w-0 items-center border border-current/25 px-2 text-center font-mono text-[10px]">{label}</span>{i < 2 && <ArrowUpRight size={14} className="shrink-0" />}</div>)}
+    </div>
+    <div className="flex gap-1">{Array.from({length:20},(_,i) => <span key={i} className={`h-1 flex-1 ${i % 4 === 0 ? "bg-accent" : "bg-current/20"}`} />)}</div>
+  </div>;
+}
 
 function Projects() {
-  return (
-    <Section id="projects" index="04" kicker="Selected work" title={<>Ideas, made <span className="italic">real.</span></>}>
-      <div className="border-t border-primary/30">
-        {projects.map((p, i) => {
-          const Icon = projectIcons[i] ?? Activity;
-          return (
-            <article key={p.title} className={`project-entry group grid gap-5 border-b border-primary/25 py-8 sm:grid-cols-[100px_1fr_40px] ${i === 0 ? "bg-primary text-primary-foreground px-5 sm:px-7" : ""}`}>
-              <div className="flex items-center gap-4 sm:block">
-                <span className={`grid h-20 w-20 shrink-0 place-items-center rounded-lg border ${i === 0 ? "border-primary-foreground/25 bg-primary-foreground/5" : "border-primary/20 bg-card/60"}`}>
-                  <Icon size={34} strokeWidth={1} className="transition duration-500 group-hover:-rotate-6 group-hover:scale-110" />
-                </span>
-                <p className="mt-0 font-mono text-xs opacity-65 sm:mt-4">PROJECT / 0{i + 1}</p>
-              </div>
-              <div>
-                {p.badge && <p className={`mb-3 flex items-center gap-2 font-mono text-xs ${i === 0 ? "text-primary-foreground" : "text-muted-foreground"}`}><span aria-hidden className="h-1.5 w-1.5 bg-accent" />{p.badge}</p>}
-                <h3 className="font-serif text-3xl leading-tight md:text-4xl">{p.title}</h3>
-                <p className={`mt-4 max-w-2xl text-sm leading-relaxed ${i === 0 ? "text-primary-foreground/85" : "text-muted-foreground"}`}>{p.description}</p>
-                <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-                  {p.tech.map(t => <li key={t} className="font-mono text-[11px] opacity-75">{t}</li>)}
-                </ul>
-              </div>
-              <Button asChild variant="ghost" size="icon" className={`self-start rounded-full ${i === 0 ? "text-primary-foreground hover:bg-accent hover:text-accent-foreground" : "text-primary"}`}>
-                <a href={p.github ?? profile.github} target="_blank" rel="noopener noreferrer" aria-label={p.github ? `${p.title} on GitHub` : `Visit Vithiya's GitHub — ${p.title}`} title={p.github ? "View project on GitHub" : "Visit my GitHub profile"}><ArrowUpRight /></a>
-              </Button>
-            </article>
-          );
-        })}
-      </div>
-    </Section>
-  );
+  return <Section id="projects" index="01" kicker="Selected projects" title={<>Engineering in <span className="italic">practice.</span></>}>
+    <div className="grid gap-5 lg:grid-cols-3">
+      {projects.slice(0,3).map((p,i) => <article key={p.title} className="group overflow-hidden rounded-lg border border-primary/20 bg-card transition duration-300 hover:-translate-y-1 hover:shadow-card">
+        <ProjectVisual index={i} />
+        <div className="p-5">
+          <p className="mb-3 flex min-h-8 items-center gap-2 text-xs font-medium text-muted-foreground"><span className="h-1.5 w-1.5 shrink-0 bg-accent" />{p.badge ?? "Multi-paradigm AI · Docker deployment"}</p>
+          <h3 className="min-h-24 font-sans text-xl font-semibold leading-snug">{p.title}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+          <ul className="mt-5 flex flex-wrap gap-2">{p.tech.map(t => <li key={t} className="border-b border-primary/20 py-1 text-xs">{t}</li>)}</ul>
+        </div>
+      </article>)}
+    </div>
+    <h3 className="mb-1 mt-9 text-sm font-semibold">More projects</h3>
+    <div className="divide-y divide-primary/20">
+      {projects.slice(3).map((p,i) => {const Icon = projectIcons[i+3] ?? Activity; return <article key={p.title} className="grid gap-3 py-5 sm:grid-cols-[40px_1fr]">
+        <Icon size={24} strokeWidth={1.5} className="mt-1" />
+        <div><div className="flex flex-wrap items-baseline justify-between gap-2"><h3 className="text-lg font-semibold">{p.title}</h3><span className="text-xs text-muted-foreground">{projectLabels[i+3]}</span></div>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+        <p className="mt-3 text-xs font-medium">{p.tech.join(" · ")}</p></div>
+      </article>})}
+    </div>
+    <Button asChild variant="outline" className="mt-5"><a href={profile.github} target="_blank" rel="noopener noreferrer"><Github />Visit my GitHub profile<ArrowUpRight /></a></Button>
+  </Section>;
 }
 
 function Education() {
@@ -404,13 +344,13 @@ function Education() {
       kicker="Education"
       title={
         <>
-          The <span className="italic text-primary">paperwork</span>.
+          Education & <span className="italic text-primary">foundations.</span>
         </>
       }
     >
       <ul className="divide-y divide-border border-y border-border">
         {education.map((ed) => (
-          <li key={ed.title} className="group grid gap-2 py-7 transition sm:grid-cols-[1fr_auto] sm:items-center">
+          <li key={ed.title} className="group grid gap-2 py-5 transition sm:grid-cols-[1fr_auto] sm:items-center">
             <div className="flex items-start gap-4">
               <span className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border text-primary transition group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
                 <GraduationCap size={18} />
@@ -438,7 +378,7 @@ function Certifications() {
       kicker="Honours"
       title={
         <>
-          Certificates, hackathons & <span className="italic text-primary">other proof</span>.
+          Learning & <span className="italic text-primary">recognition.</span>
         </>
       }
     >
@@ -520,7 +460,7 @@ function Backdrop() {
           <span key={i} className="border-l border-foreground/[0.06] last:border-r" />
         ))}
       </div>
-      <div className="absolute inset-0 bg-grain" />
+
     </div>
   );
 }
@@ -539,10 +479,10 @@ function Index() {
       <Nav />
       <main>
         <Hero />
-        <About />
-        <Skills />
-        <Experience />
         <Projects />
+        <Experience />
+        <Skills />
+        <About />
         <Education />
         <Certifications />
         <Contact />
