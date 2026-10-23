@@ -1,7 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+import editorialSculpture from "@/assets/editorial-sculpture.jpg";
+import { Button } from "@/components/ui/button";
 import { handleResumeClick, prefetchResume } from "@/lib/download-resume";
 import {
+  Activity,
+  ScanLine,
+  ChartNoAxesCombined,
+  Sprout,
+  Zap,
+  BookOpen,
+  ListChecks,
   ArrowDown,
   ArrowUpRight,
   Award,
@@ -51,7 +60,7 @@ export const Route = createFileRoute("/")({
 
 function Kicker({ children }: { children: ReactNode }) {
   return (
-    <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
+    <p className="flex items-center gap-3 font-mono text-xs uppercase text-muted-foreground">
       <span aria-hidden className="h-px w-10 bg-accent" />
       {children}
     </p>
@@ -73,7 +82,7 @@ function Section({
 }) {
   return (
     <section id={id} className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-      <div className="grid gap-8 md:grid-cols-[220px_1fr]">
+      <div className="grid gap-8 md:grid-cols-[160px_1fr]">
         <div className="fade-up">
           <Kicker>{kicker}</Kicker>
           <p aria-hidden className="mt-4 font-serif text-7xl italic leading-none text-primary/35 md:text-8xl">
@@ -81,7 +90,7 @@ function Section({
           </p>
         </div>
         <div>
-          <h2 className="fade-up font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">{title}</h2>
+          <h2 className="fade-up font-serif text-4xl leading-[1.05] tracking-normal md:text-6xl">{title}</h2>
           <div className="mt-12">{children}</div>
         </div>
       </div>
@@ -101,7 +110,7 @@ function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main">
-        <a href="#top" className="font-serif text-2xl italic tracking-tight">
+        <a href="#top" className="font-serif text-2xl italic tracking-normal">
           vithiya<span className="text-accent">.</span>
         </a>
         <ul className="hidden items-center gap-6 lg:flex">
@@ -119,14 +128,14 @@ function Nav() {
         <a href={`mailto:${profile.email}`} className="hidden rounded-full border border-foreground/25 px-4 py-1.5 text-sm transition hover:border-accent hover:bg-accent hover:text-accent-foreground lg:inline-block">
           Say hello
         </a>
-        <button
-          className="rounded-full p-2 lg:hidden"
+        <Button
+          variant="ghost" size="icon" className="rounded-full lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        </Button>
       </nav>
       {open && (
         <ul className="border-t border-border bg-background px-5 py-3 lg:hidden">
@@ -152,25 +161,22 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div aria-hidden className="absolute -right-28 -top-20 hidden h-[560px] w-[560px] rounded-full border border-accent/40 md:block" />
-      <div aria-hidden className="spin-slow absolute -right-12 top-40 hidden h-[300px] w-[300px] rounded-full border border-dashed border-primary/25 md:block" />
-
-      <div aria-hidden className="absolute inset-0 bg-ruled opacity-60" />
-      <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-36 md:pb-24 md:pt-48">
-        <p className="fade-up font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
+      <img src={editorialSculpture} alt="" aria-hidden width={1536} height={1024} fetchPriority="high" className="hero-art pointer-events-none absolute inset-0 h-full w-full object-cover" />
+      <div className="relative mx-auto max-w-6xl px-5 pb-12 pt-28 md:pb-14 md:pt-32">
+        <p className="fade-up font-mono text-xs uppercase text-muted-foreground">
           Portfolio — {profile.location}
         </p>
 
-        <h1 className="fade-up mt-8 font-serif text-[17vw] leading-[0.9] tracking-tight [animation-delay:100ms] sm:text-8xl md:text-[9.5rem]">
-          Vithiya
-          <span className="text-accent">*</span>
-          <br />
-          <span className="italic font-normal text-muted-foreground">builds software</span>
-        </h1>
+        <div className="mt-6 flex items-start gap-4">
+          <h1 className="fade-up hero-title font-serif leading-[0.92] [animation-delay:100ms]">
+            Vithiya<span className="text-accent">*</span>
+            <span className="hero-subtitle mt-3 block italic">builds software.</span>
+          </h1>
+        </div>
 
-        <div className="mt-12 grid gap-10 md:grid-cols-[1fr_320px] md:items-end">
+        <div className="mt-8 grid gap-8 md:grid-cols-[1fr_270px] md:items-end">
           <div className="fade-up [animation-delay:200ms]">
-            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+            <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
               <span className="text-foreground">*</span>That's me — a Computer Science graduate from
               Puducherry Technological University who likes her data clean, her code cleaner, and her
               machine-learning models actually shipped. Flutter apps, ML pipelines, dashboards that
@@ -186,18 +192,18 @@ function Hero() {
             </div>
           </div>
 
-          <aside className="fade-up border-l-2 border-primary/60 pl-5 [animation-delay:300ms]">
+          <aside className="fade-up border-l-2 border-accent bg-background/90 pl-5 py-3 md:mt-20 [animation-delay:300ms]">
             <dl className="space-y-4 text-sm">
               <div>
-                <dt className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Currently</dt>
+                <dt className="font-mono text-xs uppercase text-muted-foreground">Currently</dt>
                 <dd className="mt-1 font-medium">Open to software & AI/ML roles, 2026</dd>
               </div>
               <div>
-                <dt className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Degree</dt>
+                <dt className="font-mono text-xs uppercase text-muted-foreground">Degree</dt>
                 <dd className="mt-1 font-medium">B.Tech CSE · CGPA 8.3/10</dd>
               </div>
               <div>
-                <dt className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Find me</dt>
+                <dt className="font-mono text-xs uppercase text-muted-foreground">Find me</dt>
                 <dd className="mt-2 flex gap-2">
                   {[
                     { href: profile.github, label: "GitHub", Icon: Github },
@@ -224,7 +230,7 @@ function Hero() {
 
       {/* ticker */}
       <div className="relative border-y border-border bg-card/60 py-3.5">
-        <div className="marquee flex w-max gap-10 whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="marquee flex w-max gap-10 whitespace-nowrap font-mono text-xs uppercase text-muted-foreground">
           {[...skills.flatMap((s) => s.items), ...skills.flatMap((s) => s.items)].map((s, i) => (
             <span key={i} className="flex items-center gap-10">
               {s}
@@ -268,7 +274,7 @@ function About() {
             in public and build things that hold up in production.
           </p>
         </div>
-        <ul className="grid content-start gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-1">
+        <ul className="grid content-start gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-1">
           {[
             ["8.3", "CGPA, B.Tech CSE"],
             ["03", "Internships, two cities"],
@@ -342,7 +348,7 @@ function Experience() {
               aria-hidden
               className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-2 border-primary/45 bg-accent transition group-hover:border-primary"
             />
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{e.dates}</p>
+            <p className="font-mono text-xs uppercase text-primary">{e.dates}</p>
             <h3 className="mt-2 font-serif text-3xl italic">{e.role}</h3>
             <p className="mt-1 text-sm font-medium text-muted-foreground">
               {e.org} · {e.place}
@@ -355,54 +361,36 @@ function Experience() {
   );
 }
 
+const projectIcons = [Activity, ScanLine, ChartNoAxesCombined, Sprout, Zap, BookOpen, ListChecks];
+
 function Projects() {
   return (
-    <Section
-      id="projects"
-      index="04"
-      kicker="Selected work"
-      title={
-        <>
-          Projects I'd happily <span className="italic text-primary">talk your ear off</span> about.
-        </>
-      }
-    >
-      <div className="space-y-6">
-        {projects.map((p, i) => (
-          <article
-            key={p.title}
-            className="group grid gap-6 rounded-2xl border border-border bg-card p-7 transition duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-card md:grid-cols-[72px_1fr_auto] md:p-9"
-          >
-            <p aria-hidden className="font-serif text-5xl italic text-primary/30 transition group-hover:text-primary/70">
-              0{i + 1}
-            </p>
-            <div>
-              {p.badge && (
-                <p className="mb-3 w-fit rounded-full bg-accent/30 px-3 py-1 font-mono text-xs text-primary">
-                  ✦ {p.badge}
-                </p>
-              )}
-              <h3 className="font-serif text-2xl leading-snug md:text-3xl">{p.title}</h3>
-              <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{p.description}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {p.tech.map((t) => (
-                  <li key={t} className="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted-foreground">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <a
-              href={p.github ?? profile.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${p.title} on GitHub`}
-              className="grid h-12 w-12 shrink-0 place-items-center self-start rounded-full border border-foreground/25 transition group-hover:rotate-45 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground"
-            >
-              <ArrowUpRight size={18} />
-            </a>
-          </article>
-        ))}
+    <Section id="projects" index="04" kicker="Selected work" title={<>Ideas, made <span className="italic">real.</span></>}>
+      <div className="border-t border-primary/30">
+        {projects.map((p, i) => {
+          const Icon = projectIcons[i] ?? Activity;
+          return (
+            <article key={p.title} className={`project-entry group grid gap-5 border-b border-primary/25 py-8 sm:grid-cols-[100px_1fr_40px] ${i === 0 ? "bg-primary text-primary-foreground px-5 sm:px-7" : ""}`}>
+              <div className="flex items-center gap-4 sm:block">
+                <span className={`grid h-20 w-20 shrink-0 place-items-center rounded-lg border ${i === 0 ? "border-primary-foreground/25 bg-primary-foreground/5" : "border-primary/20 bg-card/60"}`}>
+                  <Icon size={34} strokeWidth={1} className="transition duration-500 group-hover:-rotate-6 group-hover:scale-110" />
+                </span>
+                <p className="mt-0 font-mono text-xs opacity-65 sm:mt-4">PROJECT / 0{i + 1}</p>
+              </div>
+              <div>
+                {p.badge && <p className={`mb-3 flex items-center gap-2 font-mono text-xs ${i === 0 ? "text-primary-foreground" : "text-muted-foreground"}`}><span aria-hidden className="h-1.5 w-1.5 bg-accent" />{p.badge}</p>}
+                <h3 className="font-serif text-3xl leading-tight md:text-4xl">{p.title}</h3>
+                <p className={`mt-4 max-w-2xl text-sm leading-relaxed ${i === 0 ? "text-primary-foreground/85" : "text-muted-foreground"}`}>{p.description}</p>
+                <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+                  {p.tech.map(t => <li key={t} className="font-mono text-[11px] opacity-75">{t}</li>)}
+                </ul>
+              </div>
+              <Button asChild variant="ghost" size="icon" className={`self-start rounded-full ${i === 0 ? "text-primary-foreground hover:bg-accent hover:text-accent-foreground" : "text-primary"}`}>
+                <a href={p.github ?? profile.github} target="_blank" rel="noopener noreferrer" aria-label={p.github ? `${p.title} on GitHub` : `Visit Vithiya's GitHub — ${p.title}`} title={p.github ? "View project on GitHub" : "Visit my GitHub profile"}><ArrowUpRight /></a>
+              </Button>
+            </article>
+          );
+        })}
       </div>
     </Section>
   );
@@ -454,7 +442,7 @@ function Certifications() {
         </>
       }
     >
-      <ul className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
         {certifications.map((c) => (
           <li key={c.title} className="group bg-card p-6 transition hover:bg-secondary/60">
             <Award size={20} className="text-primary transition group-hover:-rotate-12" />
@@ -472,14 +460,14 @@ function Certifications() {
 
 function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-      <div className="relative overflow-hidden rounded-3xl bg-primary px-7 py-14 text-primary-foreground md:px-16 md:py-20">
+    <section id="contact" className="bg-primary text-primary-foreground">
+      <div className="relative mx-auto max-w-6xl overflow-hidden px-5 py-16 md:py-20">
         <p aria-hidden className="pointer-events-none absolute -right-8 -top-16 select-none font-serif text-[16rem] italic leading-none opacity-15">
           hi
         </p>
         <div className="relative">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] opacity-80">07 — Contact</p>
-          <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[1.02] tracking-tight md:text-7xl">
+          <p className="font-mono text-xs uppercase opacity-80">07 — Contact</p>
+          <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[1.02] tracking-normal md:text-7xl">
             Got a role, a project, or just a <span className="italic">good idea?</span>
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed opacity-85">
@@ -526,9 +514,7 @@ function Contact() {
 function Backdrop() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div className="absolute inset-0 bg-wash" />
-      <div className="absolute inset-0 bg-dots" />
-      <div className="absolute inset-0 hidden bg-dots-warm sm:block" />
+      <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-x-0 top-0 mx-auto hidden h-full max-w-6xl grid-cols-4 px-5 md:grid">
         {[0, 1, 2, 3].map((i) => (
           <span key={i} className="border-l border-foreground/[0.06] last:border-r" />
@@ -564,7 +550,7 @@ function Index() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} Vithiya V — designed & built by hand, no templates harmed.
+            © {new Date().getFullYear()} Vithiya V · Software, with care.
           </p>
           <a href="#top" className="ink-underline w-fit pb-0.5 hover:text-primary hover:ink-underline-hover">
             Back to the top ↑
