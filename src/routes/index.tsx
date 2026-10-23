@@ -11,6 +11,8 @@ import {
   Zap,
   BookOpen,
   ListChecks,
+  Plus,
+  Minus,
   ArrowDown,
   ArrowUpRight,
   Award,
@@ -154,24 +156,23 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-primary/20">
+    <section className="expressive-hero relative overflow-hidden border-b border-primary/30">
       <img src={editorialSculpture} alt="" aria-hidden width={1536} height={1024} fetchPriority="high" className="hero-art pointer-events-none absolute inset-0 h-full w-full object-cover" />
       <div className="relative mx-auto max-w-6xl px-5 pb-8 pt-28 md:pt-32">
-        <div className="flex items-center gap-2 text-xs font-medium"><span aria-hidden className="h-2 w-2 rounded-full bg-accent" />Open to software developer & AI/ML roles</div>
-        <h1 className="hero-title mt-6 font-serif leading-none">Vithiya V<span className="text-accent">.</span></h1>
-        <p className="mt-4 max-w-xl font-sans text-2xl font-semibold leading-tight md:text-3xl">Software developer.<br /><span className="font-serif text-3xl font-normal italic md:text-4xl">Curious mind. Practical solutions.</span></p>
-        <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">I build machine-learning pipelines, data-driven web applications and mobile experiences. B.Tech CSE, Puducherry Technological University · Class of 2026.</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Button asChild size="lg" className="h-12 px-5"><a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={e => handleResumeClick(e, profile.resume)}><Download />Download résumé</a></Button>
-          <Button asChild variant="outline" size="lg" className="h-12 px-5"><a href="#projects">Explore projects<ArrowDown /></a></Button>
+        <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs uppercase"><span>Software / AI / Mobile</span><span className="flex items-center gap-2"><span className="h-2 w-2 bg-accent" />Open to opportunities</span></div>
+        <h1 className="expressive-name mt-8 font-sans font-semibold leading-none">VITHIYA<span className="text-accent">*</span></h1>
+        <p className="expressive-line relative z-10 mt-1 w-fit font-serif italic leading-none">A little curiosity.<br /><span className="relative"><span aria-hidden className="absolute inset-x-0 bottom-1 h-3 -rotate-2 bg-accent/65 md:h-5" /><span className="relative">A lot of possibility.</span></span></p>
+        <div className="mt-10 grid gap-8 md:grid-cols-[1fr_1fr] md:items-end">
+          <div className="max-w-md">
+            <p className="text-base leading-relaxed">I'm Vithiya V, a software developer turning complex ideas into thoughtful applications—from machine learning to mobile.</p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Button asChild className="h-11 rounded-none px-5"><a href="#projects">My work<ArrowDown /></a></Button>
+              <Button asChild variant="outline" className="h-11 rounded-none border-primary/30 bg-background/80 px-5"><a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={e => handleResumeClick(e, profile.resume)}><Download />Résumé</a></Button>
+            </div>
+          </div>
+          <div className="justify-self-start border-l-2 border-accent bg-background/85 px-4 py-2 text-sm md:justify-self-end"><p>B.Tech CSE · PTU · 2026</p><p className="mt-1 text-muted-foreground">Based in Tamil Nadu, India</p><div className="mt-3 flex gap-4"><a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">GitHub<ArrowUpRight size={14} /></a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">LinkedIn<ArrowUpRight size={14} /></a></div></div>
         </div>
-        <div className="mt-5 flex gap-5 text-sm">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 ink-underline hover:ink-underline-hover"><Github size={15} />GitHub<ArrowUpRight size={13} /></a>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 ink-underline hover:ink-underline-hover"><Linkedin size={15} />LinkedIn<ArrowUpRight size={13} /></a>
-        </div>
-        <dl className="mt-9 grid grid-cols-2 gap-y-5 border-t border-primary/20 pt-5 md:grid-cols-4">
-          {[["03", "Industry internships"], ["07", "Projects built"], ["500k+", "Posts analyzed"], ["8.3/10", "B.Tech CGPA"]].map(([value,label]) => <div key={label} className="border-l-2 border-accent pl-4"><dt className="text-xs text-muted-foreground">{label}</dt><dd className="mt-1 font-serif text-3xl">{value}</dd></div>)}
-        </dl>
+        <div className="mt-9 flex flex-wrap justify-between gap-3 border-t border-primary/25 pt-4 font-mono text-xs text-muted-foreground"><span>03 internships / 07 projects</span><span>Always curious. Always building.</span><a href="#projects" className="flex items-center gap-2">Selected work below<ArrowDown size={14} /></a></div>
       </div>
     </section>
   );
@@ -311,29 +312,29 @@ function ProjectVisual({ index }: { index: number }) {
 }
 
 function Projects() {
-  return <Section id="projects" index="01" kicker="Selected projects" title={<>Engineering in <span className="italic">practice.</span></>}>
-    <div className="grid gap-5 lg:grid-cols-3">
-      {projects.slice(0,3).map((p,i) => <article key={p.title} className="group overflow-hidden rounded-lg border border-primary/20 bg-card transition duration-300 hover:-translate-y-1 hover:shadow-card">
-        <ProjectVisual index={i} />
-        <div className="p-5">
-          <p className="mb-3 flex min-h-8 items-center gap-2 text-xs font-medium text-muted-foreground"><span className="h-1.5 w-1.5 shrink-0 bg-accent" />{p.badge ?? "Multi-paradigm AI · Docker deployment"}</p>
-          <h3 className="min-h-24 font-sans text-xl font-semibold leading-snug">{p.title}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-          <ul className="mt-5 flex flex-wrap gap-2">{p.tech.map(t => <li key={t} className="border-b border-primary/20 py-1 text-xs">{t}</li>)}</ul>
-        </div>
-      </article>)}
+  const [expanded, setExpanded] = useState<number | null>(0);
+  return <section id="projects" className="bg-primary text-primary-foreground">
+    <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+      <div className="mb-10 flex items-end justify-between gap-5"><div><p className="font-mono text-xs uppercase">01 / A collection of things I've built</p><h2 className="mt-4 font-serif text-6xl leading-none md:text-8xl">The work<span className="text-accent">.</span></h2></div><span className="hidden font-serif text-3xl italic sm:block">Ideas → reality</span></div>
+      <div className="border-t border-primary-foreground/30">
+        {projects.map((p,i) => {
+          const open = expanded === i;
+          return <article key={p.title} className="border-b border-primary-foreground/30">
+            <Button variant="ghost" className="project-toggle group grid h-auto w-full grid-cols-[32px_1fr_24px] items-start gap-3 rounded-none px-0 py-6 text-left text-primary-foreground hover:bg-primary-foreground/5 hover:text-primary-foreground md:grid-cols-[65px_1fr_32px] md:gap-5 md:py-8" aria-expanded={open} aria-controls={`project-detail-${i}`} onClick={() => setExpanded(open ? null : i)}>
+              <span className="pt-2 font-mono text-xs opacity-60">0{i+1}</span>
+              <span className="min-w-0 whitespace-normal"><span className="mb-2 block font-mono text-[10px] uppercase opacity-65">{projectLabels[i]}</span><span className="block font-serif text-3xl font-normal leading-tight md:text-4xl">{p.title}</span></span>
+              <span className="mt-2 grid h-7 w-7 place-items-center rounded-full border border-primary-foreground/40">{open ? <Minus /> : <Plus />}</span>
+            </Button>
+            {open && <div id={`project-detail-${i}`} className="grid gap-6 pb-8 md:grid-cols-[0.85fr_1.15fr] md:gap-12 md:pl-[85px]">
+              <div className="folio-visual relative flex min-h-44 flex-col justify-between border border-primary-foreground/20 bg-primary-foreground/5 p-6"><p className="font-mono text-xs uppercase">{projectLabels[i]} / 0{i+1}</p><p className="mt-6 font-serif text-4xl italic">{(projectPipelines[i] ?? [p.tech[0],p.tech[1]]).join(" → ")}</p><span className="mt-6 h-1 w-14 bg-accent" /></div>
+              <div className="self-center">{p.badge && <p className="mb-3 flex items-center gap-2 text-xs"><span className="h-1.5 w-1.5 bg-accent" />{p.badge}</p>}<p className="text-base leading-relaxed text-primary-foreground/85">{p.description}</p><ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">{p.tech.map(t => <li key={t} className="border-b border-primary-foreground/30 pb-1 font-mono text-xs">{t}</li>)}</ul></div>
+            </div>}
+          </article>;
+        })}
+      </div>
+      <Button asChild variant="ghost" className="mt-6 rounded-none text-primary-foreground hover:bg-accent hover:text-accent-foreground"><a href={profile.github} target="_blank" rel="noopener noreferrer"><Github />My GitHub<ArrowUpRight /></a></Button>
     </div>
-    <h3 className="mb-1 mt-9 text-sm font-semibold">More projects</h3>
-    <div className="divide-y divide-primary/20">
-      {projects.slice(3).map((p,i) => {const Icon = projectIcons[i+3] ?? Activity; return <article key={p.title} className="grid gap-3 py-5 sm:grid-cols-[40px_1fr]">
-        <Icon size={24} strokeWidth={1.5} className="mt-1" />
-        <div><div className="flex flex-wrap items-baseline justify-between gap-2"><h3 className="text-lg font-semibold">{p.title}</h3><span className="text-xs text-muted-foreground">{projectLabels[i+3]}</span></div>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-        <p className="mt-3 text-xs font-medium">{p.tech.join(" · ")}</p></div>
-      </article>})}
-    </div>
-    <Button asChild variant="outline" className="mt-5"><a href={profile.github} target="_blank" rel="noopener noreferrer"><Github />Visit my GitHub profile<ArrowUpRight /></a></Button>
-  </Section>;
+  </section>;
 }
 
 function Education() {
