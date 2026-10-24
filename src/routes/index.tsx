@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import editorialSculpture from "@/assets/editorial-sculpture.jpg";
+import profilePhoto from "@/assets/profile-photo.jpg";
 import { Button } from "@/components/ui/button";
 import { handleResumeClick, prefetchResume } from "@/lib/download-resume";
 import {
@@ -170,7 +171,18 @@ function Hero() {
               <Button asChild variant="outline" className="h-11 rounded-none border-primary/30 bg-background/80 px-5"><a href={profile.resume} download="Vithiya_V_Resume.pdf" onClick={e => handleResumeClick(e, profile.resume)}><Download />Résumé</a></Button>
             </div>
           </div>
-          <div className="justify-self-start border-l-2 border-accent bg-background/85 px-4 py-2 text-sm md:justify-self-end"><p>B.Tech CSE · PTU · 2026</p><p className="mt-1 text-muted-foreground">Based in Tamil Nadu, India</p><div className="mt-3 flex gap-4"><a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">GitHub<ArrowUpRight size={14} /></a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">LinkedIn<ArrowUpRight size={14} /></a></div></div>
+          <figure className="relative w-fit justify-self-start md:justify-self-end">
+            <span aria-hidden className="absolute -right-2.5 -top-2.5 h-full w-full rotate-2 border border-accent" />
+            <img src={profilePhoto} alt="Vithiya V" width={900} height={900} className="relative h-56 w-56 border border-primary/20 object-cover object-top md:h-64 md:w-64" />
+            <figcaption className="relative mt-2 w-fit border-l-2 border-accent bg-background/85 px-3 py-1.5 text-sm">
+              <p>B.Tech CSE · PTU · 2026</p>
+              <p className="mt-1 flex flex-wrap items-center gap-x-3 text-muted-foreground">
+                <span>Tamil Nadu, India</span>
+                <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">GitHub<ArrowUpRight size={14} /></a>
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">LinkedIn<ArrowUpRight size={14} /></a>
+              </p>
+            </figcaption>
+          </figure>
         </div>
         <div className="mt-9 flex flex-wrap justify-between gap-3 border-t border-primary/25 pt-4 font-mono text-xs text-muted-foreground"><span>03 internships / 07 projects</span><span>Always curious. Always building.</span><a href="#projects" className="flex items-center gap-2">Selected work below<ArrowDown size={14} /></a></div>
       </div>
@@ -403,6 +415,7 @@ function Contact() {
   return (
     <section id="contact" className="bg-primary text-primary-foreground">
       <div className="relative mx-auto max-w-6xl overflow-hidden px-5 py-16 md:py-20">
+        <img src={profilePhoto} alt="" aria-hidden className="absolute right-5 top-6 hidden h-24 w-24 rounded-full border-2 border-accent object-cover object-top sm:block md:h-28 md:w-28" />
         <p aria-hidden className="pointer-events-none absolute -right-8 -top-16 select-none font-serif text-[16rem] italic leading-none opacity-15">
           hi
         </p>
